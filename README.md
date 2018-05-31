@@ -1,2 +1,2 @@
 # Processing
-Processing code
+A collection of Processing sketches
