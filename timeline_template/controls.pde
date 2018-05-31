@@ -3,6 +3,7 @@
 void keyPressed() {
   if (key == '+') tLine.zoom(10);
   if (key == '-') tLine.zoom(-10);
+  if (key == 'i') saveFrame("img/timeLine_####.png");
 }
 
 void mousePressed() {

@@ -2,11 +2,18 @@ class TimelineEvent {
   int year;
   String event;
   String description;
+  color idle, highlight;
 
-  TimelineEvent(int year, String event, String description) {
+  TimelineEvent(int year, String event, String description, color idle, color highlight) {
     this.year = year;
     this.event = event;
     this.description = description;
+    this.idle = idle;
+    this.highlight = highlight;
+  }
+
+  TimelineEvent(int year, String event, String description) {
+    this(year, event, description, color(100, 100), color(255, 0, 0));
   }
 
   void display(float timeLen, int timeBegin, int timeEnd) {
@@ -21,14 +28,14 @@ class TimelineEvent {
 
     if (abs(mX-x) < 4*t && (mY-y)<200 && (mY-y)>-10) {
       strokeWeight(1);
-      stroke(255, 0, 0);
-      fill(255, 0, 0);
+      stroke(highlight);
+      fill(highlight);
       text (year, x+25, y+170);
       text (description, x+25, y+190);
     } else {
       strokeWeight(0.5);
-      stroke(200, 0, 0, 100);
-      fill(200, 0, 0, 100);
+      stroke(idle);
+      fill(idle);
     }
     line (x, y, x, y+150);
     line (x, y+150, x+20, y+150);
