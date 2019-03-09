@@ -2,6 +2,8 @@
  
  Based on Raven Kwok (aka Guo Ruiwen) Processing rewriting
  of the original idea and Cinder code by Robert Hodgin
+ https://www.openprocessing.org/sketch/84094
+ https://libcinder.org/docs/guides/tour/hello_cinder.html
 
  */
 
@@ -11,23 +13,21 @@ import processing.pdf.*;
 ParticleSystem partSys;
 boolean mouseDown, recordVid, savePdf;
 PVector mouseLoc, mousePLoc, mouseVel;
-PImage pattern;
+PImage baseImg;
 
 String imgName = "Zaha Hadid";
 String extension = ".jpg";
 String fileName;
-color bgCol = #7F815A; //#99AF58;
+color bgCol = #7F815A;
 
 void setup() {
   size(900, 900, P2D);
 
-  stroke(255, 255, 0, 150);
-
   fileName = imgName + extension;
 
-  pattern = loadImage(fileName);
+  baseImg = loadImage(fileName);
 
-  pattern.resize(width, height);
+  baseImg.resize(width, height);
   //surface.setSize(pattern.width, pattern.height);
 
   partSys = new ParticleSystem();
@@ -37,6 +37,8 @@ void setup() {
 
   recordVid = false;
   savePdf = false;
+  
+  stroke(255, 255, 0, 150);
 }
 
 void draw() {
@@ -51,14 +53,12 @@ void draw() {
     blendMode(ADD);
   }
 
-
-
   if (mouseDown) partSys.addParticles(10, mouseLoc, mouseVel);
   partSys.containment();
-  partSys.repel();
-  partSys.update(pattern);
-
+  partSys.repel(5.0);
+  partSys.update(baseImg);
   partSys.display();
+  
   if (savePdf)
   {
     endRecord();
@@ -87,7 +87,7 @@ void mouseMoved() {
 
 void keyPressed() {
   if (key=='i'|| key=='I') {
-    saveFrame("images/2019 assistants/"+imgName+"_####.png");
+    saveFrame("images/"+imgName+"_####.png");
   }
   if (key=='r'||key=='R') {
     recordVid = !recordVid;
@@ -98,7 +98,7 @@ void keyPressed() {
 
   if (key == 'f' || key == 'F')
   {
-    saveFrame("images/2019 assistants/"+imgName+"_####.png");
+    saveFrame("images/"+imgName+"_####.png");
     savePdf = true;
   }
 }

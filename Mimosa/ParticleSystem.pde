@@ -52,13 +52,13 @@ class ParticleSystem {
     }
   }
 
-  void repel() {
+  void repel(float thresMult) {
     for (int i=0; i<particles.size(); i++) {
       Particle targetParticle1 = particles.get(i);
       for (int j=i+1; j<particles.size(); j++) {
         Particle targetParticle2 = particles.get(j);
         PVector dir = PVector.sub(targetParticle1.loc, targetParticle2.loc);
-        float thres = (targetParticle1.radius+targetParticle2.radius)*5;
+        float thres = (targetParticle1.radius+targetParticle2.radius)*thresMult;
         if ( dir.x > -thres && dir.x < thres && dir.y > -thres && dir.y < thres ) {
           pushStyle();
           stroke(155, 180, 0, 80);

@@ -35,7 +35,7 @@ class Particle{
     
     if(loc.x>0 && loc.x<width-1 && loc.y>0 && loc.y<height-1){
       int index = floor(loc.x) + floor(loc.y)*pattern.width;
-      targetRadius = brightness(pattern.pixels[index])/float(255)*3+0.5;
+      targetRadius = brightness(pattern.pixels[index])/255.0*3+0.5;
     }else{
       targetRadius = 0.1;
     }
